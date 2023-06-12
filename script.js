@@ -1,13 +1,17 @@
 let hasOperations = false;
-let completeNumbers = false;
-let expression = '';
+let completeNumbers = true;
+let expression = '0';
 
 const display = document.querySelector('#display');
 
 const operations = document.querySelectorAll('.operations');
 operations.forEach(button => {
   button.addEventListener('click', () => {
-    if(completeNumbers) {
+    if(hasOperations && completeNumbers) {
+        operateExpression();
+        addtoExpression(button);
+        completeNumbers = false;
+    } else if(completeNumbers) {
         completeNumbers = false;
         addtoExpression(button);
         hasOperations = true;
@@ -16,7 +20,6 @@ operations.forEach(button => {
 });
 
 const numbers = document.querySelectorAll('.nums');
-
 numbers.forEach(button => {
     button.addEventListener('click', () => {
         completeNumbers = true;
@@ -24,18 +27,46 @@ numbers.forEach(button => {
     });
 });
 
+const equalsOp = document.querySelector('#equals');
+equalsOp.addEventListener('click', () => {
+    if(completeNumbers && hasOperations) {
+        operateExpression();
+        hasOperations = false;
+    }
+});
+
+const btnClear = document.querySelector('#clear');
+btnClear.addEventListener('click', () => {
+    expression = '0';
+    display.textContent = expression;
+    hasOperations = false;
+    completeNumbers = true;
+})
+
+function operateExpression() {
+    const expArray = expression.split(" ");
+    display.textContent = operate(expArray[1],expArray[0],expArray[2]);
+}
+
 function addtoExpression(button) {
     if(button.classList.contains("operations")) {
         expression = expression + " " + button.textContent + " ";
     } else {
-        expression = expression + button.textContent;
+        const expArray = expression.split(" ");
+        if(expArray[expArray.length-1] == '0') {
+            expArray.pop();
+            expArray.push(button.textContent);
+            expression = expArray.join(" ");
+        } else {
+            expression = expression + button.textContent;
+        }
     }
     
     display.textContent = expression;
 }
 
 function add(num1,num2) {
-    return num1+num2;
+    return parseFloat(num1)+parseFloat(num2);
 }
 
 function subtract(num1,num2) {
@@ -64,5 +95,3 @@ function operate(op,num1,num2) {
             break;
     }
 }
-
-console.log(operate(operator,num1,num2));
