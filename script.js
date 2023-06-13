@@ -11,10 +11,12 @@ operations.forEach(button => {
         operateExpression();
         addtoExpression(button);
         completeNumbers = false;
+        btnDecimalPoint.disabled = false;
     } else if(completeNumbers) {
         completeNumbers = false;
         addtoExpression(button);
         hasOperations = true;
+        btnDecimalPoint.disabled = false;
     }
   });
 });
@@ -42,6 +44,12 @@ btnClear.addEventListener('click', () => {
     hasOperations = false;
     completeNumbers = true;
 })
+
+const btnDecimalPoint = document.querySelector('#decPoint');
+btnDecimalPoint.addEventListener('click', () => {
+    addtoExpression(btnDecimalPoint);
+    btnDecimalPoint.disabled = true;
+});
 
 function operateExpression() {
     const expArray = expression.split(" ");
