@@ -1,5 +1,4 @@
 let hasOperations = false;
-let completeNumbers = true;
 let expression = '0';
 
 const display = document.querySelector('#display');
@@ -7,14 +6,14 @@ const display = document.querySelector('#display');
 const operations = document.querySelectorAll('.operations');
 operations.forEach(button => {
   button.addEventListener('click', () => {
-    if(hasOperations && completeNumbers) {
+    if(hasOperations) {
         operateExpression();
         addtoExpression(button);
-        completeNumbers = false;
         btnDecimalPoint.disabled = false;
-    } else if(completeNumbers) {
-        completeNumbers = false;
+    } else {
         addtoExpression(button);
+        const btnZero = document.querySelector('#btnZero');
+        addtoExpression(btnZero);
         hasOperations = true;
         btnDecimalPoint.disabled = false;
     }
@@ -24,14 +23,13 @@ operations.forEach(button => {
 const numbers = document.querySelectorAll('.nums');
 numbers.forEach(button => {
     button.addEventListener('click', () => {
-        completeNumbers = true;
         addtoExpression(button);
     });
 });
 
 const equalsOp = document.querySelector('#equals');
 equalsOp.addEventListener('click', () => {
-    if(completeNumbers && hasOperations) {
+    if(hasOperations) {
         operateExpression();
         hasOperations = false;
     }
