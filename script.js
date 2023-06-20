@@ -65,29 +65,6 @@ btnDecimalPoint.addEventListener('click', () => {
     lowerdisplay.textContent = operand2;
 });
 
-function operateExpression() {
-    const expArray = expression.split(" ");
-    expression = operate(expArray[1],expArray[0],expArray[2]);
-    display.textContent = expression;
-}
-
-function addtoExpression(button) {
-    if(button.classList.contains("operations")) {
-        expression = expression + " " + button.textContent + " ";
-    } else {
-        const expArray = expression.split(" ");
-        if(expArray[expArray.length-1] == '0') {
-            expArray.pop();
-            expArray.push(button.textContent);
-            expression = expArray.join(" ");
-        } else {
-            expression = expression + button.textContent;
-        }
-    }
-    
-    display.textContent = expression;
-}
-
 function add(num1,num2) {
     return parseFloat(num1)+parseFloat(num2);
 }
