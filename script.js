@@ -65,6 +65,21 @@ btnDecimalPoint.addEventListener('click', () => {
     lowerdisplay.textContent = operand2;
 });
 
+const btnDelete = document.querySelector('#delete');
+btnDelete.addEventListener('click', () => {
+    if(operand2.slice(-2) === '.0') {
+        operand2 = operand2.slice(0,-1);
+    }
+    operand2 = operand2.slice(0,-1);
+    if(operand2 === '') {
+        operand2 = '0';
+    }
+    lowerdisplay.textContent = operand2;
+    if(operand2.charAt(operand2.length-1) == '.') {
+        operand2 = operand2 + '0';
+    }
+});
+
 function add(num1,num2) {
     return parseFloat(num1)+parseFloat(num2);
 }
