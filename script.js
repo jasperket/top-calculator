@@ -1,57 +1,74 @@
-let hasOperations = false;
-let expression = '0';
+let operand1 = '0';
+let operator = null;
+let operand2 = '0';
+let newOperator = false;
 
-const display = document.querySelector('#display');
+const upperdisplay = document.querySelector('#upperdisplay');
+const lowerdisplay = document.querySelector('#lowerdisplay');
 
 const operations = document.querySelectorAll('.operations');
 operations.forEach(button => {
   button.addEventListener('click', () => {
-    if(hasOperations) {
-        operateExpression();
-        addtoExpression(button);
-        btnDecimalPoint.disabled = false;
+    if(operator !== null) {
+        operand1 = operate(operator,operand1,operand2);
     } else {
-        addtoExpression(button);
-        const btnZero = document.querySelector('#btnZero');
-        addtoExpression(btnZero);
-        hasOperations = true;
-        btnDecimalPoint.disabled = false;
+        operand1 = operand2;
     }
+    operator = button.textContent;
+    operand2 = operand1;
+    upperdisplay.textContent = operand1 + " " + operator;
+    lowerdisplay.textContent = operand2;
+    newOperator = true;
   });
 });
 
 const numbers = document.querySelectorAll('.nums');
 numbers.forEach(button => {
     button.addEventListener('click', () => {
-        addtoExpression(button);
+        if(newOperator || operand2 === '0') {
+            operand2 = button.textContent;
+            newOperator = false;
+        }
+        else if (operand2.includes(".") && operand2.charAt(operand2.length - 1) == '0') {
+            operand2 = operand2.slice(0,-1) + button.textContent;
+        }
+        else {
+            operand2 = operand2 + button.textContent;
+        }
+        lowerdisplay.textContent = operand2;
     });
 });
 
 const equalsOp = document.querySelector('#equals');
 equalsOp.addEventListener('click', () => {
-    if(hasOperations) {
-        operateExpression();
-        hasOperations = false;
+    if(operator !== null) {
+        upperdisplay.textContent = operand1 + " " + operator + " " + operand2 + " = ";
+        operand2 = operate(operator,operand1,operand2);
+        operator = null;
+        lowerdisplay.textContent = operand2;
     }
 });
 
 const btnClear = document.querySelector('#clear');
 btnClear.addEventListener('click', () => {
-    expression = '0';
-    display.textContent = expression;
-    hasOperations = false;
-    completeNumbers = true;
+    operand1 = '0';
+    operator = null;
+    operand2 = '0';
+    newOperator = false;
+    lowerdisplay.textContent = operand2;
+    upperdisplay.textContent = '';
 })
 
 const btnDecimalPoint = document.querySelector('#decPoint');
 btnDecimalPoint.addEventListener('click', () => {
-    addtoExpression(btnDecimalPoint);
-    btnDecimalPoint.disabled = true;
+    operand2 = operand2 + ".0"
+    lowerdisplay.textContent = operand2;
 });
 
 function operateExpression() {
     const expArray = expression.split(" ");
-    display.textContent = operate(expArray[1],expArray[0],expArray[2]);
+    expression = operate(expArray[1],expArray[0],expArray[2]);
+    display.textContent = expression;
 }
 
 function addtoExpression(button) {
