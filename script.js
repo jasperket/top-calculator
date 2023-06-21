@@ -1,7 +1,7 @@
 let operand1 = '0';
 let operator = null;
 let operand2 = '0';
-let newOperator = false;
+let clearLowerDisplay = false;
 
 const upperdisplay = document.querySelector('#upperdisplay');
 const lowerdisplay = document.querySelector('#lowerdisplay');
@@ -18,16 +18,16 @@ operations.forEach(button => {
     operand2 = operand1;
     upperdisplay.textContent = operand1 + " " + operator;
     lowerdisplay.textContent = operand2;
-    newOperator = true;
+    clearLowerDisplay = true;
   });
 });
 
 const numbers = document.querySelectorAll('.nums');
 numbers.forEach(button => {
     button.addEventListener('click', () => {
-        if(newOperator || operand2 === '0') {
+        if(clearLowerDisplay || operand2 === '0') {
             operand2 = button.textContent;
-            newOperator = false;
+            clearLowerDisplay = false;
         }
         else if (operand2.includes(".") && operand2.charAt(operand2.length - 1) == '0') {
             operand2 = operand2.slice(0,-1) + button.textContent;
@@ -36,6 +36,9 @@ numbers.forEach(button => {
             operand2 = operand2 + button.textContent;
         }
         lowerdisplay.textContent = operand2;
+        if(upperdisplay.textContent.includes("=")) {
+            upperdisplay.textContent = "";
+        }
     });
 });
 
@@ -45,7 +48,9 @@ equalsOp.addEventListener('click', () => {
         upperdisplay.textContent = operand1 + " " + operator + " " + operand2 + " = ";
         operand2 = operate(operator,operand1,operand2);
         operator = null;
+        operator1 = '0';
         lowerdisplay.textContent = operand2;
+        clearLowerDisplay = true;
     }
 });
 
@@ -54,7 +59,7 @@ btnClear.addEventListener('click', () => {
     operand1 = '0';
     operator = null;
     operand2 = '0';
-    newOperator = false;
+    clearLowerDisplay = false;
     lowerdisplay.textContent = operand2;
     upperdisplay.textContent = '';
 })
@@ -77,6 +82,13 @@ btnDelete.addEventListener('click', () => {
     lowerdisplay.textContent = operand2;
     if(operand2.charAt(operand2.length-1) == '.') {
         operand2 = operand2 + '0';
+    }
+});
+
+document.addEventListener('keydown',(e) => {
+    const button = document.querySelector(`button[data-key='${e.key}']`);
+    if(button) {
+        button.click();
     }
 });
 
