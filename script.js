@@ -19,6 +19,7 @@ operations.forEach(button => {
     upperdisplay.textContent = operand1 + " " + operator;
     lowerdisplay.textContent = operand2;
     clearLowerDisplay = true;
+    button.blur();
   });
 });
 
@@ -39,6 +40,7 @@ numbers.forEach(button => {
         if(upperdisplay.textContent.includes("=")) {
             upperdisplay.textContent = "";
         }
+        button.blur();
     });
 });
 
@@ -51,6 +53,7 @@ equalsOp.addEventListener('click', () => {
         operator1 = '0';
         lowerdisplay.textContent = operand2;
         clearLowerDisplay = true;
+        button.blur();
     }
 });
 
@@ -62,12 +65,14 @@ btnClear.addEventListener('click', () => {
     clearLowerDisplay = false;
     lowerdisplay.textContent = operand2;
     upperdisplay.textContent = '';
+    btnClear.blur();
 })
 
 const btnDecimalPoint = document.querySelector('#decPoint');
 btnDecimalPoint.addEventListener('click', () => {
     operand2 = operand2 + ".0"
     lowerdisplay.textContent = operand2;
+    btnDecimalPoint.blur();
 });
 
 const btnDelete = document.querySelector('#delete');
@@ -83,6 +88,7 @@ btnDelete.addEventListener('click', () => {
     if(operand2.charAt(operand2.length-1) == '.') {
         operand2 = operand2 + '0';
     }
+    btnDelete.blur();
 });
 
 document.addEventListener('keydown',(e) => {
