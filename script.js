@@ -51,14 +51,21 @@ equalsOp.addEventListener('click', () => {
         operand2 = operate(operator,operand1,operand2);
         operator = null;
         operator1 = '0';
-        lowerdisplay.textContent = operand2;
+        if(operand2 === Infinity) {
+            clear();
+            lowerdisplay.textContent = "Error"
+        } else {
+            lowerdisplay.textContent = operand2;
+        }
         clearLowerDisplay = true;
-        button.blur();
+        equalsOp.blur();
     }
 });
 
 const btnClear = document.querySelector('#clear');
-btnClear.addEventListener('click', () => {
+btnClear.addEventListener('click',clear);
+
+function clear() {
     operand1 = '0';
     operator = null;
     operand2 = '0';
@@ -66,7 +73,7 @@ btnClear.addEventListener('click', () => {
     lowerdisplay.textContent = operand2;
     upperdisplay.innerHTML = '&nbsp';
     btnClear.blur();
-})
+}
 
 const btnDecimalPoint = document.querySelector('#decPoint');
 btnDecimalPoint.addEventListener('click', () => {
