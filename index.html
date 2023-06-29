@@ -4,40 +4,52 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
+    <link rel="stylesheet" href="style.css">
     <title>Calculator</title>
 </head>
 <body>
     <div id="container">
-        <p id="upperdisplay"></p>
-        <p id="lowerdisplay">0</p>
-        <div>
-            <button id="clear">CLEAR</button>
-            <button id="delete">DEL</button>
-            <button class="operations" data-key="/">/</button>
+        <div id="display">
+            <p id="upperdisplay">&nbsp;</p>
+            <p id="lowerdisplay">0</p>
         </div>
-        <div>
-            <button class="nums" data-key="7">7</button>
-            <button class="nums" data-key="8">8</button>
-            <button class="nums" data-key="9">9</button>
-            <button class="operations" data-key="*">*</button>
+        <div id="buttons">
+            <div>
+                <button id="clear">C</button>
+                <button id="delete">
+                    <span class="material-symbols-outlined">
+                        backspace
+                    </span>
+                </button>
+                <button class="operations" data-key="/">/</button>
+            </div>
+            <div>
+                <button class="nums" data-key="7">7</button>
+                <button class="nums" data-key="8">8</button>
+                <button class="nums" data-key="9">9</button>
+                <button class="operations" data-key="*">*</button>
+            </div>
+            <div>
+                <button class="nums" data-key="4">4</button>
+                <button class="nums" data-key="5">5</button>
+                <button class="nums" data-key="6">6</button>
+                <button class="operations" data-key="-">-</button>
+            </div>
+            <div>
+                <button class="nums" data-key="1">1</button>
+                <button class="nums" data-key="2">2</button>
+                <button class="nums" data-key="3">3</button>
+                <button class="operations" data-key="+">+</button>
+            </div>
+            <div>
+                <button class="nums" id="btnZero" data-key="0">0</button>
+                <button id="decPoint" data-key=".">.</button>
+                <button id="equals" data-key="Enter">=</button>
+            </div>
         </div>
-        <div>
-            <button class="nums" data-key="4">4</button>
-            <button class="nums" data-key="5">5</button>
-            <button class="nums" data-key="6">6</button>
-            <button class="operations" data-key="-">-</button>
-        </div>
-        <div>
-            <button class="nums" data-key="1">1</button>
-            <button class="nums" data-key="2">2</button>
-            <button class="nums" data-key="3">3</button>
-            <button class="operations" data-key="+">+</button>
-        </div>
-        <div>
-            <button class="nums" id="btnZero" data-key="0">0</button>
-            <button id="decPoint" data-key=".">.</button>
-            <button id="equals" data-key="Enter">=</button>
-        </div>
+        
     </div>
     
     <script src="script.js"></script>

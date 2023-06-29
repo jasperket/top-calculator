@@ -64,7 +64,7 @@ btnClear.addEventListener('click', () => {
     operand2 = '0';
     clearLowerDisplay = false;
     lowerdisplay.textContent = operand2;
-    upperdisplay.textContent = '';
+    upperdisplay.innerHTML = '&nbsp';
     btnClear.blur();
 })
 
