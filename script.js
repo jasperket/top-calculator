@@ -38,7 +38,7 @@ numbers.forEach(button => {
         }
         lowerdisplay.textContent = operand2;
         if(upperdisplay.textContent.includes("=")) {
-            upperdisplay.textContent = "";
+            upperdisplay.innerHTML = '&nbsp';
         }
         button.blur();
     });
