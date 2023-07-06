@@ -28,6 +28,8 @@ body {
   'opsz' 48;
 }
 
+.md-36 { font-size:36px; }
+
 #container {
     height: 75vmin;
     width: 45vmin;
